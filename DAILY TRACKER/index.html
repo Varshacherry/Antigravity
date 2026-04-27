@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Routine & Habit Tracker</title>
+    <!-- Modern Typography: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="dashboard-header glass-panel">
+            <div class="greeting-sec">
+                <h1 id="greeting">Good Morning!</h1>
+                <p id="current-date">Fetching date...</p>
+            </div>
+            <div class="time-sec">
+                <h2 id="current-time">00:00</h2>
+            </div>
+        </header>
+
+        <!-- Main Grid Layout -->
+        <main class="dashboard-grid">
+            
+            <!-- Left Column: Schedule & Tasks -->
+            <section class="left-col">
+                <!-- Daily Schedule / Timeline -->
+                <div class="widget timeline-widget glass-panel">
+                    <div class="widget-header">
+                        <i class="fa-solid fa-list-check"></i>
+                        <h3>Daily Schedule</h3>
+                    </div>
+                    <ul class="timeline" id="schedule-timeline">
+                        <li class="timeline-item" data-time="06:00">
+                            <span class="time-label">06:00 AM</span>
+                            <div class="timeline-content">Wake up & Hydrate</div>
+                        </li>
+                        <li class="timeline-item" data-time="06:30">
+                            <span class="time-label">06:30 AM</span>
+                            <div class="timeline-content">Freshen Up</div>
+                        </li>
+                        <li class="timeline-item" data-time="07:00">
+                            <span class="time-label">07:00 AM</span>
+                            <div class="timeline-content">Exercise & Yoga</div>
+                        </li>
+                        <li class="timeline-item" data-time="08:30">
+                            <span class="time-label">08:30 AM</span>
+                            <div class="timeline-content">Breakfast</div>
+                        </li>
+                        <li class="timeline-item" data-time="09:00">
+                            <span class="time-label">09:00 AM</span>
+                            <div class="timeline-content">Start Work/Study Day</div>
+                        </li>
+                        <li class="timeline-item" data-time="13:00">
+                            <span class="time-label">01:00 PM</span>
+                            <div class="timeline-content">Lunch Break</div>
+                        </li>
+                        <li class="timeline-item" data-time="16:00">
+                            <span class="time-label">04:00 PM</span>
+                            <div class="timeline-content">Evening Snack</div>
+                        </li>
+                        <li class="timeline-item" data-time="20:00">
+                            <span class="time-label">08:00 PM</span>
+                            <div class="timeline-content">Dinner</div>
+                        </li>
+                        <li class="timeline-item" data-time="22:00">
+                            <span class="time-label">10:00 PM</span>
+                            <div class="timeline-content">Wind down & Sleep</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Right Column: Habit Trackers -->
+            <section class="right-col">
+                
+                <!-- Water Tracker Widget -->
+                <div class="widget tracker-widget glass-panel">
+                    <div class="widget-header">
+                        <i class="fa-solid fa-droplet" style="color: var(--calm-blue);"></i>
+                        <h3>Hydration</h3>
+                    </div>
+                    <div class="water-tracker">
+                        <div class="water-glass" id="water-add-btn">
+                            <div class="water-fill" id="water-fill-level"></div>
+                            <span class="water-text"><span id="water-count">0</span> / 8</span>
+                        </div>
+                        <p class="tracker-hint">Click glass to add water</p>
+                        <button class="reset-btn" id="water-reset">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Sleep Tracker Widget -->
+                <div class="widget tracker-widget glass-panel">
+                    <div class="widget-header">
+                        <i class="fa-solid fa-moon" style="color: var(--neon-purple);"></i>
+                        <h3>Sleep Tracker</h3>
+                    </div>
+                    <div class="sleep-tracker">
+                        <div class="sleep-input-group">
+                            <input type="number" id="sleep-hours" min="0" max="24" step="0.5" placeholder="0">
+                            <span>hrs</span>
+                        </div>
+                        <button class="action-btn" id="save-sleep">Save Sleep</button>
+                        <div class="sleep-feedback" id="sleep-feedback">Log tonight's sleep!</div>
+                    </div>
+                </div>
+
+                <!-- Diet & Food Timetable Widget -->
+                <div class="widget diet-widget glass-panel">
+                    <div class="widget-header">
+                        <i class="fa-solid fa-utensils" style="color: var(--vibrant-orange);"></i>
+                        <h3>Diet & Nutrition</h3>
+                    </div>
+                    <div class="diet-cards">
+                        <div class="diet-card">
+                            <span class="meal-time">Breakfast (8:30 AM)</span>
+                            <p>Oats, Nuts, Fruit Bowl, Green Tea</p>
+                        </div>
+                        <div class="diet-card">
+                            <span class="meal-time">Lunch (1:00 PM)</span>
+                            <p>Brown Rice, Veggies, Lean Protein</p>
+                        </div>
+                        <div class="diet-card">
+                            <span class="meal-time">Snack (4:00 PM)</span>
+                            <p>Greek Yogurt or Almonds</p>
+                        </div>
+                        <div class="diet-card">
+                            <span class="meal-time">Dinner (8:00 PM)</span>
+                            <p>Light Soup, Salad, Grilled Fish/Paneer</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Goal updated!</div>
+
+    <script src="app.js"></script>
+</body>
+</html>

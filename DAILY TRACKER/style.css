@@ -1,0 +1,356 @@
+:root {
+    /* Color Palette - Premium Dark Theme */
+    --bg-gradient: linear-gradient(135deg, #0f172a, #1e1b4b);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    
+    /* Accents */
+    --calm-blue: #38bdf8;
+    --neon-purple: #c084fc;
+    --vibrant-orange: #fb923c;
+    --success-green: #4ade80;
+    --danger-red: #f87171;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow-x: hidden;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Glassmorphism Basis */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+}
+
+.greeting-sec h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(to right, var(--calm-blue), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.greeting-sec p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.time-sec h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+/* Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Widgets Base */
+.widget {
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.widget:hover {
+    transform: translateY(-5px);
+}
+
+.widget-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.widget-header h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.widget-header i {
+    font-size: 1.5rem;
+}
+
+/* Timeline/Schedule */
+.timeline {
+    list-style: none;
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid var(--glass-border);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text-secondary);
+    border: 3px solid var(--bg-gradient);
+    transition: all 0.3s ease;
+}
+
+.timeline-item.active::before {
+    background: var(--success-green);
+    box-shadow: 0 0 10px var(--success-green);
+}
+
+.timeline-item.active .timeline-content {
+    color: #fff;
+    font-weight: 600;
+}
+
+.time-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+}
+
+.timeline-content {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+/* Water Tracker */
+.water-tracker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.water-glass {
+    width: 150px;
+    height: 200px;
+    border: 4px solid var(--glass-border);
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: rgba(255,255,255,0.02);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.water-glass:active {
+    transform: scale(0.95);
+}
+
+.water-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%; /* Dynamic */
+    background: linear-gradient(to top, #0ea5e9, #38bdf8);
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+/* Add wave effect */
+.water-fill::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 200%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: wave 2s infinite linear;
+}
+
+@keyframes wave {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.water-text {
+    position: relative;
+    z-index: 2;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.tracker-hint {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Sleep Tracker */
+.sleep-tracker {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sleep-input-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.sleep-input-group input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    width: 80px;
+    text-align: center;
+    outline: none;
+    border-bottom: 2px solid var(--glass-border);
+}
+
+.sleep-input-group input:focus {
+    border-bottom-color: var(--neon-purple);
+}
+
+.sleep-feedback {
+    min-height: 24px;
+    color: var(--success-green);
+    font-weight: 500;
+}
+
+/* Diet Plan Cards */
+.diet-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.diet-card {
+    background: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--vibrant-orange);
+}
+
+.diet-card .meal-time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.diet-card p {
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Buttons */
+.action-btn {
+    background: linear-gradient(to right, #8b5cf6, #d946ef);
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.action-btn:hover {
+    opacity: 0.9;
+}
+
+.reset-btn {
+    background: transparent;
+    border: 1px solid var(--danger-red);
+    color: var(--danger-red);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.reset-btn:hover {
+    background: var(--danger-red);
+    color: #fff;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--success-green);
+    color: #1a1a1a;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(74, 222, 128, 0.3);
+    transition: bottom 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1000;
+}
+
+.toast.show {
+    bottom: 40px;
+}
